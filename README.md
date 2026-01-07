@@ -15,7 +15,6 @@
 <!-- prettier-ignore-start -->
 <!-- markdownlint-disable-next-line MD036 -->
 <div style="margin-bottom: 12px">Use ReboCap in SlimeVR Server</div>
-<div>SlimeVR Server で ReboCap を使用する</div>
 
 <!-- prettier-ignore-end -->
 
@@ -28,52 +27,57 @@
   <img src="https://img.shields.io/badge/python-3.12.x-blue?logo=python&logoColor=edb641" alt="python">
 </p>
 
-## このリポジトリは https://github.com/colasama/ReboSlime からforkされたソースを更新したものです
+## This repository is an updated fork of https://github.com/colasama/ReboSlime
 
-## fork元からの変更点
-- Rebocap SDKのアップデート。
-- Python 3.12 でのビルド。
-- トラキングポイントの15点をデフォルトに変更、起動時のトラッキングポイント数のデフォルト値、トラッキングポイント数入力のタイムアウト時間を設定、これらはconfig.jsonにて設定変更可能。
-- GitHubでビルド、リリースを前提としてGitHub上で`Poetry` でのBuildに必要な設定を追加。
+## Changes from the original fork
+- Updated Rebocap SDK.
+- Built with Python 3.12.
+- Changed the default number of tracking points to 15.
+- added settings for the default number of tracking points at startup, and the timeout duration for tracking‑point input. These values can be modified in `config.json`.
+- Added the necessary configuration for building with `Poetry` on GitHub, assuming GitHub-based builds and releases.
 
-## 使用説明
+## Usage
 
-- `Releases` から実行ファイルをダウンロードしてください。最新の `v0.4.2` は Rebocap v40 以降のバージョンに対応しています。もし以前の VMT と連携するバージョンを使いたい場合は、 `v0.31` をダウンロードしてください。
-- SlimeVR サーバーを起動します。
-- ReboCap クライアントを開き、動作 **动作校准1**。
-- `run.bat` または `reboslime.exe` を実行します。
-- これで SlimeVR にトラッカーが表示されるはずです。その後は通常の SlimeVR の使い方に従ってください。
+- Download the executable from the `Releases` page.  
+  The latest `v0.4.2` supports Rebocap v40 and later.  
+  If you need the version compatible with older VMT integration, download `v0.31`.
+- Start the SlimeVR server.
+- Open the ReboCap client and perform **Action Calibration 1**.
+- Run `run.bat` or `reboslime.exe`.
+- The trackers should now appear in SlimeVR. Continue using SlimeVR as usual.
 
-## 開発関連
+## Development
 
-- 本プロジェクトは `Poetry` を使用して依存関係を管理しています。Python 3.12.x をインストールした後、  `pip install poetry` を実行してください。
-- `poetry install` で依存関係をインストールし、 `poetry run python reboslime.py` を実行すればプログラムを起動できます。
+- This project uses `Poetry` for dependency management.  
+  After installing Python 3.12.x, run `pip install poetry`.
+- Install dependencies with `poetry install`, then start the program with:  
+  `poetry run python reboslime.py`.
 
-## パッケージング関連
+## Packaging
 
-- 本プロジェクトを実行ファイルとしてパッケージ化する場合は、 `pyinstaller` をインストールした後、以下のコマンドを実行してください。
+- To package this project into an executable, install `pyinstaller` and run:
 
   ```bash
   pyinstaller -F -i .\assets\reboslime.ico reboslime.py
   ```
 
-- パッケージ化が完了したら、 `config.json` を実行ファイルと同じディレクトリに置いてください。
+- After packaging is complete, place `config.json` in the same directory as the executable.
 
-## 注意事項
+## Notes
 
-- ReboCap - クライアントの仕様上、現在は元の VR の使用方法と同様に、胸・腰・脚の 8 点装着 が必須です。また、最低でもこの 8 点を装着しないと正常に動作しません。現在は 6 / 8 / 10 / 12 / 15 点から選択できます。
-  - 6 点：胸 + 腰 + 大腿 + 下腿
-  - 8 点：胸 + 腰 + 大腿 + 下腿 + 足
-  - 10 点：胸 + 腰 + 大腿 + 下腿 + 足 + 上腕
-  - 12 点：胸 + 腰 + 大腿 + 下腿 + 足 + 上腕 + 前腕
-  - 15 点：全身
-- **注意**：どの構成を選んでも「0 番ノード」が出現します。未割り当てにするか、または腰（ヒップ）に割り当てることを推奨します。
+- Due to the specifications of the ReboCap client, at least the same setup as the original VR usage is required: 8 mounting points (chest, waist, and legs) are mandatory. The application will not function correctly unless at least these 8 points are used. Currently, you can choose from 6 / 8 / 10 / 12 / 15 points.
+  - 6 points: chest + waist + thighs + lower legs
+  - 8 points: chest + waist + thighs + lower legs + feet
+  - 10 points: chest + waist + thighs + lower legs + feet + upper arms
+  - 12 points: chest + waist + thighs + lower legs + feet + upper arms + forearms
+  - 15 points: full body
+- **Note**: Regardless of the configuration you choose, a “Node 0” will appear. It is recommended to leave it unassigned or assign it to the waist (hips).
 
 ## ToDo
 
-- [x] 装着点数の選択機能を実装。
-- [ ] 15 点モードで頭部ノードが使用できない問題の解決。
+- [x] Implemented tracking point count selection.
+- [ ] Fix the issue where the head node cannot be used in 15-point mode.
 
-## 謝辞
+## Acknowledgements
 
-- https://github.com/lmore377/moslime - SlimeVR のネットワーク通信部分は、このプロジェクト構造を大きく参考にしています。
+- https://github.com/lmore377/moslime — The SlimeVR network communication part of this project is heavily based on the structure of this project.
