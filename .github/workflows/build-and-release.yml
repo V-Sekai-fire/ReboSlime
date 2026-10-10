@@ -11,6 +11,9 @@ on:
           - recreate_lock
           - build
 
+permissions:
+  contents: write
+
 jobs:
   recreate_lock:
     if: ${{ github.event.inputs.action == 'recreate_lock' }}
